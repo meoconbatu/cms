@@ -22,7 +22,7 @@ jobs:
       - checkout
 
       # specify any bash command here prefixed with `run: `
-      - run: go get github.com/boltdb/bolt v1.3.1
+      - run: go get github.com/boltdb/bolt@v1.3.1
       - run: go get github.com/dgrijalva/jwt-go@v2.7.0+incompatible
       - run: go get github.com/elithrar/simple-scrypt@v1.3.0
       - run: go get github.com/lib/pq@v1.1.0
