@@ -22,5 +22,12 @@ jobs:
       - checkout
 
       # specify any bash command here prefixed with `run: `
-      - run: go get -v -t -d ./...
+      - run: go get github.com/boltdb/bolt v1.3.1
+      - run: go get github.com/dgrijalva/jwt-go@v2.7.0+incompatible
+      - run: go get github.com/elithrar/simple-scrypt@v1.3.0
+      - run: go get github.com/lib/pq@v1.1.0
+      - run: go get golang.org/x/crypto@v0.0.0-20190426145343-a29dc8fdc734
+      - run: go get golang.org/x/net@v0.0.0-20190404232315-eb5bcb51f2a3
+      - run: go get golang.org/x/oauth2@v0.0.0-20190402181905-9f3314589c9a
+      - run: go get rsc.io/quote@v1.5.2
       - run: go test -v ./...
