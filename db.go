@@ -2,7 +2,11 @@ package cms
 
 import (
 	"database/sql"
+	"os"
 
+	migrate "github.com/golang-migrate/migrate/v4"
+	_ "github.com/golang-migrate/migrate/v4/database/postgres"
+	_ "github.com/golang-migrate/migrate/v4/source/file"
 	_ "github.com/lib/pq"
 )
 
@@ -14,7 +18,23 @@ type PgStore struct {
 }
 
 func newDB() *PgStore {
-	db, err := sql.Open("postgres", "user=cms dbname=cms sslmode=disable")
+	// databaseURL := "user=cms dbname=cms sslmode=disable"
+	databaseURL := "postgres://cms@localhost:5432/circle_test?sslmode=disable"
+	if databaseURLEnv := os.Getenv("DB_URL"); databaseURLEnv != "" {
+		databaseURL = databaseURLEnv
+	}
+	sqlFiles := "file://"
+	if sqlFilesEnv := os.Getenv("DB_MIGRATIONS"); sqlFilesEnv != "" {
+		sqlFiles = sqlFilesEnv
+	}
+	m, err := migrate.New(sqlFiles, databaseURL)
+	if err != nil {
+		panic(err)
+	}
+	if err := m.Up(); err != nil && err.Error() != "no change" {
+		panic(err)
+	}
+	db, err := sql.Open("postgres", databaseURL)
 	if err != nil {
 		panic(err)
 	}
