@@ -11,7 +11,6 @@ jobs:
         environment: # environment variables for primary container
           POSTGRES_USER: cms
           POSTGRES_DB: cms
-    working_directory: /circleci/cms
     steps:
       - checkout
       - restore_cache:
@@ -32,7 +31,7 @@ jobs:
           name: Run unit tests
           environment:
             DB_URL: "postgres://cms@localhost:5432/cms?sslmode=disable"
-            DB_MIGRATIONS: /circleci/cms
+            DB_MIGRATIONS: ../
           command: go test -v ./...
       - save_cache:
           key: v1-pkg-cache
