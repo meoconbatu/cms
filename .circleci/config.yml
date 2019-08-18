@@ -31,7 +31,7 @@ jobs:
           name: Run unit tests
           environment:
             DB_URL: "postgres://cms@localhost:5432/cms?sslmode=disable"
-            DB_MIGRATIONS: ./
+            #DB_MIGRATIONS: ./
           command: go test -v ./...
       - save_cache:
           key: v1-pkg-cache
