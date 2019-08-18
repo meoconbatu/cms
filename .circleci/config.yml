@@ -7,10 +7,13 @@ jobs:
     docker:
       # specify the version
       - image: circleci/golang:1.12
+        environment:
+            GO111MODULE: "ON"
       - image: circleci/postgres:9.6-alpine
         environment: # environment variables for primary container
           POSTGRES_USER: cms
           POSTGRES_DB: cms
+    working_directory: /go/src/github.com/circleci/cms
     steps:
       - checkout
       - restore_cache:
@@ -31,7 +34,7 @@ jobs:
           name: Run unit tests
           environment:
             DB_URL: "postgres://cms@localhost:5432/cms?sslmode=disable"
-            #DB_MIGRATIONS: ./
+            DB_MIGRATIONS: /go/src/github.com/circleci/cms
           command: go test -v ./...
       - save_cache:
           key: v1-pkg-cache
