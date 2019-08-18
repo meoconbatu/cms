@@ -2,6 +2,7 @@ package main
 
 import (
 	"net/http"
+	"os"
 
 	"golang.org/x/net/context"
 
@@ -14,6 +15,7 @@ func withContext(ctx context.Context, w http.ResponseWriter, r *http.Request) {
 	w.Write([]byte(bar.(string)))
 }
 func main() {
+	port := os.Getenv("PORT")
 	logger := middleware.CreateLogger("server")
 	http.Handle("/", middleware.Time(logger, cms.ServeIndex))
 	http.HandleFunc("/new", cms.HandleNew)
@@ -27,5 +29,8 @@ func main() {
 	http.HandleFunc("/auth/gplus/authorize", cms.AuthURLHandler)
 	http.HandleFunc("/auth/gplus/callback", cms.CallbackURLHandler)
 	http.HandleFunc("/oauth", cms.ServeOAuthRestricted)
-	http.ListenAndServe(":3000", nil)
+	if port == "" {
+		port = "3000"
+	}
+	http.ListenAndServe(":"+port, nil)
 }
