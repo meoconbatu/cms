@@ -29,11 +29,11 @@ jobs:
             echo Failed waiting for Postgres && exit 1
       - run: 
         name: Run unit tests
-          environment:
-            DB_URL: postgres://cms@localhost:5432/cms?sslmode=disable
-            DB_MIGRATIONS: file://./
-          command: |
-            go test -v ./...
+        environment:
+          DB_URL: postgres://cms@localhost:5432/cms?sslmode=disable
+          DB_MIGRATIONS: file://./
+        command: |
+          go test -v ./...
       - save_cache:
           key: v1-pkg-cache
           paths:
