@@ -6,7 +6,7 @@ jobs:
   build:
     docker:
       # specify the version
-      - image: circleci/golang:1.12
+      - image: circleci/golang:1.11
         environment:
             GO111MODULE: "ON"
       - image: circleci/postgres:9.6-alpine
