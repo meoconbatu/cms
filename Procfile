@@ -1,1 +1,1 @@
-web: cmd/cmd
+web: cmd/cms
