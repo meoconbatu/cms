@@ -30,7 +30,7 @@ jobs:
       - run: 
         name: Run unit tests
           environment:
-            DB_URL: "postgres://cms@localhost:5432/cms?sslmode=disable"
+            DB_URL: postgres://cms@localhost:5432/cms?sslmode=disable
             DB_MIGRATIONS: file://./
           command: |
             go test -v ./...
