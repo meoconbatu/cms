@@ -6,7 +6,7 @@ import (
 )
 
 // Tmpl is a reference to all of our templates
-var Tmpl = template.Must(template.ParseGlob("/Users/thanhmi/mintt/cms/templates/*"))
+var Tmpl = template.Must(template.ParseGlob("./templates/*"))
 
 // Page is the struct used for each webpage
 type Page struct {
