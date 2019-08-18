@@ -20,7 +20,7 @@ type PgStore struct {
 func newDB() *PgStore {
 	// databaseURL := "user=cms dbname=cms sslmode=disable"
 	databaseURL := "postgres://cms@localhost:5432/cms?sslmode=disable"
-	if databaseURLEnv := os.Getenv("DB_URL"); databaseURLEnv != "" {
+	if databaseURLEnv := os.Getenv("DATABASE_URL"); databaseURLEnv != "" {
 		databaseURL = databaseURLEnv
 	}
 	sqlFiles := "file://"
