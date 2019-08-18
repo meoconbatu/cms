@@ -44,6 +44,9 @@ jobs:
       - checkout
       - run:
           name: Deploy Master to Heroku
+          environment:
+            DB_URL: "postgres://aikvzryjzblwwe:1e65486fbe56924103c9bcf949eb048aa552f967da529362dc8cd52ed9b6ca35@ec2-23-21-91-183.compute-1.amazonaws.com:5432/df6gpdtnfb5iv8"
+            DB_MIGRATIONS: file://
           command: |
             git push https://heroku:2bcb5cc5-0aef-41f8-a00b-151fa3e3cba6@git.heroku.com/stark-oasis-56294.git master
 workflows:
