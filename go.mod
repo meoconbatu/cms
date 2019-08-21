@@ -8,6 +8,7 @@ require (
 	github.com/elithrar/simple-scrypt v1.3.0
 	github.com/golang-migrate/migrate/v4 v4.5.0
 	github.com/ianlancetaylor/demangle v0.0.0-20181102032728-5e5cf60278f6 // indirect
+	github.com/joho/godotenv v1.3.0
 	github.com/lib/pq v1.1.0
 	golang.org/x/arch v0.0.0-20190815191158-8a70ba74b3a1 // indirect
 	golang.org/x/crypto v0.0.0-20190426145343-a29dc8fdc734
