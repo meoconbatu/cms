@@ -2,11 +2,13 @@ package cms
 
 import (
 	"database/sql"
+	"log"
 	"os"
 
 	migrate "github.com/golang-migrate/migrate/v4"
 	_ "github.com/golang-migrate/migrate/v4/database/postgres"
 	_ "github.com/golang-migrate/migrate/v4/source/file"
+	"github.com/joho/godotenv"
 	_ "github.com/lib/pq"
 )
 
@@ -18,15 +20,13 @@ type PgStore struct {
 }
 
 func newDB() *PgStore {
-	// databaseURL := "user=cms dbname=cms sslmode=disable"
-	databaseURL := "postgres://cms@localhost:5432/cms?sslmode=disable"
-	if databaseURLEnv := os.Getenv("DATABASE_URL"); databaseURLEnv != "" {
-		databaseURL = databaseURLEnv
+	err := godotenv.Load()
+	if err != nil {
+		log.Fatal("Error loading .env file")
 	}
-	sqlFiles := "file://"
-	if sqlFilesEnv := os.Getenv("DB_MIGRATIONS"); sqlFilesEnv != "" {
-		sqlFiles = sqlFilesEnv
-	}
+	databaseURL := os.Getenv("DATABASE_URL")
+	sqlFiles := os.Getenv("DB_MIGRATIONS")
+
 	m, err := migrate.New(sqlFiles, databaseURL)
 	if err != nil {
 		panic(err)
