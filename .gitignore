@@ -1,0 +1,6 @@
+go.sum
+.env
+cmd/server.log
+cmd/my.db
+server.log
+.vscode/*
